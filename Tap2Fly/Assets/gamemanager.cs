@@ -7,18 +7,24 @@ using static SoundManagerScript;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
 using System.Reflection;
+using TMPro;
 
 public class gamemanager : MonoBehaviour
 {
-    public GameObject gameOverCanvas, startscreen;
+    public GameObject gameOverCanvas, startscreen, tap2play;
     public Button reward, vida,  novavida, retry;
     public Image vidacinza, rewardcinza;
     public adbutton AdButton;
     public GameObject[] obstacles;
+    public GameObject InputWindow;
+    public TextMeshProUGUI inputField;
+    public string theName;
 
     public void Start()
     {
         gameOverCanvas.SetActive(false);
+        tap2play.SetActive(false);
+        InputWindow.SetActive(true);
         startscreen.SetActive(true);
         Time.timeScale = 0;
     }
@@ -75,5 +81,10 @@ public class gamemanager : MonoBehaviour
         startscreen.SetActive(false);
         gameOverCanvas.SetActive(false);
         Time.timeScale = 1;
+    }
+    public void SaveScore(){
+        theName = inputField.text;
+        InputWindow.SetActive(false);
+        tap2play.SetActive(true);
     }
 }

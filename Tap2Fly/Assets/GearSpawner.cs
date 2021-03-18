@@ -18,7 +18,8 @@ public class GearSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Score.score > 49)
+        /*
+        if (Score.score > 49 && gamemode == "????")
         {
             if (timer > maxTime)
             {
@@ -29,7 +30,8 @@ public class GearSpawner : MonoBehaviour
             }
 
             timer += Time.deltaTime;
-        }
+        } 
+        */
     }
 
 }
