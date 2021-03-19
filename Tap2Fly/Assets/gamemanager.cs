@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,19 +12,26 @@ using TMPro;
 public class gamemanager : MonoBehaviour
 {
     public GameObject gameOverCanvas, startscreen, tap2play;
-    public Button reward, vida,  novavida, retry;
+    public Button reward, vida,  novavida, retry, changeUsername;
     public Image vidacinza, rewardcinza;
     public adbutton AdButton;
     public GameObject[] obstacles;
-    public GameObject InputWindow;
+    public GameObject InputWindow, inputleader;
     public TextMeshProUGUI inputField;
     public string theName;
 
     public void Start()
     {
         gameOverCanvas.SetActive(false);
-        tap2play.SetActive(false);
-        InputWindow.SetActive(true);
+        if (PlayerPrefs.GetString("username", "ghfdjkshguifdhs123") == "ghfdjkshguifdhs123"){
+            tap2play.SetActive(false);
+            InputWindow.SetActive(true);
+        }
+        else
+        {
+            tap2play.SetActive(true);
+            InputWindow.SetActive(false);
+        }
         startscreen.SetActive(true);
         Time.timeScale = 0;
     }
@@ -72,6 +79,9 @@ public class gamemanager : MonoBehaviour
     }
     public void Replay()
     {
+        inputleader.SetActive(true);
+        SaveScore(Score.score);
+        inputleader.SetActive(false);
         SceneManager.LoadScene(0);
     }
     public void Play()
@@ -82,9 +92,28 @@ public class gamemanager : MonoBehaviour
         gameOverCanvas.SetActive(false);
         Time.timeScale = 1;
     }
-    public void SaveScore(){
+    public void SaveUsername(){
         theName = inputField.text;
+        PlayerPrefs.SetString("username", theName);
         InputWindow.SetActive(false);
+        tap2play.SetActive(true);
+    }
+    public void SaveScore(int score){
+        inputleader.GetComponent<leaderboard>().AddNewHighscore(PlayerPrefs.GetString("username"), score); //TODO: change
+    }
+    public void ShowLeaderboard(){
+        tap2play.SetActive(false);
+        inputleader.SetActive(true);
+        inputleader.GetComponent<leaderboard>().GetLeaderboard();
+    }
+    public void ChangeUsername(){
+        //TODO: Delete old name highscore and add the new one
+        inputleader.SetActive(false);
+        tap2play.SetActive(false);
+        InputWindow.SetActive(true);
+    }
+    public void exitLeaderboard(){
+        inputleader.SetActive(false);
         tap2play.SetActive(true);
     }
 }
