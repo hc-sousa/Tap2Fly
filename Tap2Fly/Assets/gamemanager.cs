@@ -99,7 +99,7 @@ public class gamemanager : MonoBehaviour
         tap2play.SetActive(true);
     }
     public void SaveScore(int score){
-        inputleader.GetComponent<leaderboard>().AddNewHighscore(PlayerPrefs.GetString("username"), score); //TODO: change
+        inputleader.GetComponent<leaderboard>().AddNewHighscore(PlayerPrefs.GetString("username"), score);
     }
     public void ShowLeaderboard(){
         tap2play.SetActive(false);

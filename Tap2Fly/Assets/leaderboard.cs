@@ -25,9 +25,17 @@ public class leaderboard : MonoBehaviour
     public void GetLeaderboard(){ StartCoroutine(DownloadLeaderboard()); }
 
     IEnumerator DownloadLeaderboard(){
+        foreach (Transform child in HighscoreEntry.transform.parent.transform) {
+            if (child.name != "HighscoreEntry") GameObject.Destroy(child.gameObject);
+        }
+        FormatLeaderboard(PlayerPrefs.GetString("Leaderboard"));
         WWW www = new WWW(webURL + publicCode + "/pipe/");
         yield return www;
 
+        foreach (Transform child in HighscoreEntry.transform.parent.transform) {
+            if (child.name != "HighscoreEntry") GameObject.Destroy(child.gameObject);
+        }
+        PlayerPrefs.SetString("Leaderboard", www.text);
         if (string.IsNullOrEmpty(www.error)) FormatLeaderboard(www.text);
         else{               
             GameObject ChildName = HighscoreEntry.transform.GetChild(0).gameObject;
@@ -47,7 +55,7 @@ public class leaderboard : MonoBehaviour
             Leaderboard[i] = new Highscore(username, score);
             if (i == 0) {
                 GameObject ChildName = HighscoreEntry.transform.GetChild(0).gameObject;
-                ChildName.GetComponent<UnityEngine.UI.Text>().text = Leaderboard[i].username;
+                ChildName.GetComponent<UnityEngine.UI.Text>().text = i+1 + " - " + Leaderboard[i].username;
                 GameObject ChildScore = HighscoreEntry.transform.GetChild(1).gameObject;
                 ChildScore.GetComponent<UnityEngine.UI.Text>().text = Leaderboard[i].score.ToString();
             }
@@ -56,7 +64,7 @@ public class leaderboard : MonoBehaviour
                 instance.transform.parent = HighscoreEntry.transform.parent;
                 instance.transform.position = HighscoreEntry.transform.position + new Vector3(0, -30*i, 0);
                 GameObject ChildName = instance.transform.GetChild(0).gameObject;
-                ChildName.GetComponent<UnityEngine.UI.Text>().text = Leaderboard[i].username;
+                ChildName.GetComponent<UnityEngine.UI.Text>().text =  i+1 + " - " + Leaderboard[i].username;
                 GameObject ChildScore = instance.transform.GetChild(1).gameObject;
                 ChildScore.GetComponent<UnityEngine.UI.Text>().text = Leaderboard[i].score.ToString();
             }
