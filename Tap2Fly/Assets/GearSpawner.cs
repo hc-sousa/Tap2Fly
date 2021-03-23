@@ -8,6 +8,7 @@ public class GearSpawner : MonoBehaviour
     private float timer = 0;
     public GameObject pipe;
     public float height;
+    public gamemanager gameManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +19,8 @@ public class GearSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Score.score > 49 && gamemode == "????")
+        
+        if (Score.score > 49 && gameManager.currentGameMode == "power")
         {
             if (timer > maxTime)
             {
@@ -31,7 +32,7 @@ public class GearSpawner : MonoBehaviour
 
             timer += Time.deltaTime;
         } 
-        */
+        
     }
 
 }
