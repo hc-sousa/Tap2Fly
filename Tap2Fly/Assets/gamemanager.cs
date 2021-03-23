@@ -12,11 +12,12 @@ using TMPro;
 public class gamemanager : MonoBehaviour
 {
     public GameObject gameOverCanvas, startscreen, tap2play;
+    public Rigidbody2D tappy;
     public Button reward, vida,  novavida, retry, changeUsername;
     public Image vidacinza, rewardcinza;
     public adbutton AdButton;
     public GameObject[] obstacles;
-    public GameObject InputWindow, inputleader, gameMode;
+    public GameObject InputWindow, inputleader, gameMode, inverseMode, powerMode;
     public TextMeshProUGUI inputField;
     public string theName, currentGameMode;
 
@@ -91,7 +92,17 @@ public class gamemanager : MonoBehaviour
         novavida.gameObject.SetActive(false);
         startscreen.SetActive(false);
         gameOverCanvas.SetActive(false);
+        if (currentGameMode == "inverse") playInverse();
+        else if (currentGameMode == "power") playPower();
         Time.timeScale = 1;
+    }
+    //TODO:
+    public void playInverse(){
+        tappy.gravityScale *= -1;
+        inverseMode.SetActive(true);
+    }
+    public void playPower(){
+        powerMode.SetActive(true);
     }
     public void SaveUsername(){
         theName = inputField.text;
@@ -129,96 +140,103 @@ public class gamemanager : MonoBehaviour
     GameObject inversetopower = gameMode.transform.GetChild(5).gameObject; 
     */
     public void clasToPower(){    
-        GameObject classicMode = gameMode.transform.GetChild(0).gameObject; 
-        GameObject powerMode = gameMode.transform.GetChild(8).gameObject;
+        GameObject classicModeLogo = gameMode.transform.GetChild(0).gameObject; 
+        GameObject powerModeLogo = gameMode.transform.GetChild(8).gameObject;
         GameObject clastoinversed = gameMode.transform.GetChild(4).gameObject; 
         GameObject clastopower = gameMode.transform.GetChild(1).gameObject; 
         GameObject powertoinverse = gameMode.transform.GetChild(2).gameObject; 
         GameObject powertoclas = gameMode.transform.GetChild(6).gameObject;
-        classicMode.SetActive(false);
-        powerMode.SetActive(true);
+        classicModeLogo.SetActive(false);
+        powerModeLogo.SetActive(true);
         clastoinversed.SetActive(false);
         clastopower.SetActive(false);
         powertoinverse.SetActive(true);
         powertoclas.SetActive(true);
+        powerMode.SetActive(true);
         currentGameMode = "power";
 
     }
     public void clasToInverse(){
-        GameObject classicMode = gameMode.transform.GetChild(0).gameObject; 
-        GameObject inverseMode = gameMode.transform.GetChild(7).gameObject;
+        GameObject classicModeLogo = gameMode.transform.GetChild(0).gameObject; 
+        GameObject inverseModeLogo = gameMode.transform.GetChild(7).gameObject;
         GameObject clastoinversed = gameMode.transform.GetChild(4).gameObject; 
         GameObject clastopower = gameMode.transform.GetChild(1).gameObject; 
         GameObject inversetoclas = gameMode.transform.GetChild(3).gameObject; 
         GameObject inversetopower = gameMode.transform.GetChild(5).gameObject; 
-        classicMode.SetActive(false);
-        inverseMode.SetActive(true);
+        classicModeLogo.SetActive(false);
+        inverseModeLogo.SetActive(true);
         clastoinversed.SetActive(false);
         clastopower.SetActive(false);
         inversetopower.SetActive(true);
         inversetoclas.SetActive(true);
+        inverseMode.SetActive(true);
         currentGameMode = "inverse";
     }
     public void powerToClas(){
-        GameObject classicMode = gameMode.transform.GetChild(0).gameObject; 
-        GameObject powerMode = gameMode.transform.GetChild(8).gameObject; 
+        GameObject classicModeLogo = gameMode.transform.GetChild(0).gameObject; 
+        GameObject powerModeLogo = gameMode.transform.GetChild(8).gameObject; 
         GameObject clastoinversed = gameMode.transform.GetChild(4).gameObject; 
         GameObject clastopower = gameMode.transform.GetChild(1).gameObject; 
         GameObject powertoinverse = gameMode.transform.GetChild(2).gameObject; 
         GameObject powertoclas = gameMode.transform.GetChild(6).gameObject; 
-        classicMode.SetActive(true);
-        powerMode.SetActive(false);
+        classicModeLogo.SetActive(true);
+        powerModeLogo.SetActive(false);
         clastoinversed.SetActive(true);
         clastopower.SetActive(true);
         powertoinverse.SetActive(false);
         powertoclas.SetActive(false);
+        powerMode.SetActive(false);
         currentGameMode = "classic";
 
     }
     public void powerToInverse(){
-        GameObject inverseMode = gameMode.transform.GetChild(7).gameObject; 
-        GameObject powerMode = gameMode.transform.GetChild(8).gameObject; 
+        GameObject inverseModeLogo = gameMode.transform.GetChild(7).gameObject; 
+        GameObject powerModeLogo = gameMode.transform.GetChild(8).gameObject; 
         GameObject powertoinverse = gameMode.transform.GetChild(2).gameObject; 
         GameObject powertoclas = gameMode.transform.GetChild(6).gameObject; 
         GameObject inversetoclas = gameMode.transform.GetChild(3).gameObject; 
         GameObject inversetopower = gameMode.transform.GetChild(5).gameObject; 
-        inverseMode.SetActive(true);
-        powerMode.SetActive(false);
+        inverseModeLogo.SetActive(true);
+        powerModeLogo.SetActive(false);
         inversetoclas.SetActive(true);
         inversetopower.SetActive(true);
         powertoinverse.SetActive(false);
         powertoclas.SetActive(false);
+        inverseMode.SetActive(true);
+        powerMode.SetActive(false);
         currentGameMode = "inverse";
     }
     public void inverseToClas(){
-        GameObject classicMode = gameMode.transform.GetChild(0).gameObject; 
-        GameObject inverseMode = gameMode.transform.GetChild(7).gameObject;
+        GameObject classicModeLogo = gameMode.transform.GetChild(0).gameObject; 
+        GameObject inverseModeLogo = gameMode.transform.GetChild(7).gameObject;
         GameObject clastoinversed = gameMode.transform.GetChild(4).gameObject; 
         GameObject clastopower = gameMode.transform.GetChild(1).gameObject; 
         GameObject inversetoclas = gameMode.transform.GetChild(3).gameObject; 
         GameObject inversetopower = gameMode.transform.GetChild(5).gameObject; 
-        classicMode.SetActive(true);
-        inverseMode.SetActive(false);
+        classicModeLogo.SetActive(true);
+        inverseModeLogo.SetActive(false);
         clastoinversed.SetActive(true);
         clastopower.SetActive(true);
         inversetopower.SetActive(false);
         inversetoclas.SetActive(false);
+        inverseMode.SetActive(false);
         currentGameMode = "classic";
-
     }
     public void inverseToPower(){
-        GameObject inverseMode = gameMode.transform.GetChild(7).gameObject; 
-        GameObject powerMode = gameMode.transform.GetChild(8).gameObject; 
+        GameObject inverseModeLogo = gameMode.transform.GetChild(7).gameObject; 
+        GameObject powerModeLogo = gameMode.transform.GetChild(8).gameObject; 
         GameObject powertoinverse = gameMode.transform.GetChild(2).gameObject; 
         GameObject powertoclas = gameMode.transform.GetChild(6).gameObject; 
         GameObject inversetoclas = gameMode.transform.GetChild(3).gameObject; 
         GameObject inversetopower = gameMode.transform.GetChild(5).gameObject; 
-        inverseMode.SetActive(false);
-        powerMode.SetActive(true);
+        inverseModeLogo.SetActive(false);
+        powerModeLogo.SetActive(true);
         inversetoclas.SetActive(false);
         inversetopower.SetActive(false);
         powertoinverse.SetActive(true);
         powertoclas.SetActive(true);
+        inverseMode.SetActive(false);
+        powerMode.SetActive(true);
         currentGameMode = "power"; 
     }
 }

@@ -22,10 +22,12 @@ public class Movement : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             //Jump
-            rb.velocity = Vector2.up * velocity;
+            if (gameManager.currentGameMode == "inverse") rb.velocity = Vector2.down * velocity;
+            else rb.velocity = Vector2.up * velocity;
             if (gameManager.tag == "jogando")
             {
                 SoundManagerScript.PlaySound("Flap");
+                PlayerPrefs.SetInt("taps", (PlayerPrefs.GetInt("taps", 0) + 1));
             }
             else if (gameManager.tag == "naojogando") { SoundManagerScript.PlaySound("Button"); }
         }
@@ -37,6 +39,7 @@ public class Movement : MonoBehaviour
         {
             // SoundManagerScript.PlaySound("Hit"); SE VIR ANÚNCIO FICA ASSIM
             // gameManager.GameOver();
+            PlayerPrefs.SetInt("deaths", (PlayerPrefs.GetInt("deaths", 0) + 1));
             gameManager.GameOver();
             SoundManagerScript.PlaySound("Hit");
             //gameManager.Replay();

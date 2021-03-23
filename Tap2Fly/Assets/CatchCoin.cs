@@ -22,6 +22,7 @@ public class CatchCoin : MonoBehaviour
         Destroy(coin);
         Score.score++;
         PlayerPrefs.SetInt("moedas", (PlayerPrefs.GetInt("moedas", 0) + 1));
+        PlayerPrefs.SetInt("totalCoins", (PlayerPrefs.GetInt("totalCoins", 0) + 1));
         SoundManagerScript.PlaySound("Score");
         if (Score.score > melhorpontuacao.highscore)
         {
